@@ -2,16 +2,16 @@
 
 {% block title %}
 {{ super() }}
-List of users
+List of reports
 {% endblock %}
 
 {% block body%}
 <div class="row">
     <div class="col">
-        <h1>Users:</h1>
-        {% for user_id in users %}
+        <h1>Reports:</h1>
+        {% for report_id in reports %}
         <ul>
-            <li><a href="{{ url_for('user.details', pk = user_id) }}">{{users[user_id]}}</a></li>
+            <li><a href="{{ url_for('report.details', pk = report_id) }}">{{ report_id }}</a></li>
         </ul>
         {% endfor %}
         {% endblock %}

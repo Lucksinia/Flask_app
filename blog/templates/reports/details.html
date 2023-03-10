@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ super() }}
+{{ report_name}}
+{% endblock %}
+
+{% block body%}
+<h1>{{ report_name }}</h1>
+<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi veritatis expedita sint amet voluptatibus
+    repellendus
+    magni obcaecati modi libero ab neque sequi quae quasi, voluptatum rem similique qui hic dolores.
+</p>
+<a href="{{ url_for('report.list') }}">Go to List</a>
+{% endblock %}
