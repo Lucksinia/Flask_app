@@ -5,5 +5,16 @@ User profile
 {% endblock %}
 
 {% block body %}
-<h1>{{ user.email }}</h1>
+<h1>Hi, {{ user.first_name }}!</h1>
+<h3>Author of article:</h3>
+{% for article in user.author.articles %}
+<ul>
+    <li>
+        <a href="{{ url_for('article.article_detail', article_id=article.id) }}">
+            {{ article.title }}
+        </a>
+    </li>
+</ul>
+{% endfor %}
+
 {% endblock %}

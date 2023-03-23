@@ -2,21 +2,16 @@
 {% from "macro/formhelpers.html" import render_field %}
 
 {% block title %}
-User register
+{{super}} Create article
 {% endblock %}
 
 {% block body %}
-{% if errors %}
-{% for error in errors %}
-<div class="alert alert-danger" role="alert">
-    {{ error }}
+<div class="row">
+    <h1>Create article:</h1>
 </div>
-{% endfor %}
-{% endif %}
-
-<form method="POST">
+<form method="POST" action="{{ url_for('article.create_article') }}">
     {{ form.csrf_token }}
-    {% for field in ['first_name', 'last_name', 'email', 'password', 'confirm_password'] %}
+    {% for field in ['title', 'text'] %}
     {{ render_field(form[field]) }}
     {% endfor %}
 
