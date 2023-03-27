@@ -1,30 +1,24 @@
 <!doctype html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
+
     {% block css %}
-    <link rel="stylesheet" href="{{url_for('static', filename = 'css/bootstrap.rtl.min.css')}}">
-    {%endblock%}
-
-    <title>{% block title %}My Flask app:{% endblock %}</title>
-</head>
-{%include 'navbar.html'%}
-
-<body>
-    <div class="container">
-        {% block body %}{% endblock %}
-    </div>
-
-
-    <!-- Optional JavaScript; choose one of the two! -->
-    {% block js %}
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="{{url_for('static', filename = 'js/bootstrap.bundle.min.js')}}"></script>
+        <!-- Bootstrap CSS -->
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
     {% endblock %}
-</body>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+{% include 'navbar.html' %}
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
 
+{% block js %}
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+{% endblock %}
+</body>
 </html>
