@@ -7,50 +7,48 @@ from blog.extensions import db
 from blog.forms.article import CreateArticleForm
 from blog.models import Article, Author, Tag
 
-article = Blueprint(
-    "article", __name__, url_prefix="/articles", static_folder="../static"
-)
+article = Blueprint('article', __name__, url_prefix='/articles', static_folder='../static')
 
 
-@article.route("/", methods=["GET"])
+@article.route('/', methods=['GET'])
 def article_list():
     articles: Article = Article.query.all()
     return render_template(
-        "articles/list.html",
+        'articles/list.html',
         articles=articles,
     )
 
 
-@article.route("/<int:article_id>/", methods=["GET"])
+@article.route('/<int:article_id>/', methods=['GET'])
 def article_detail(article_id):
-    _article: Article = (
-        Article.query.filter_by(id=article_id)
-        .options(joinedload(Article.tags))
-        .one_or_none()
-    )
+    _article: Article = Article.query.filter_by(
+        id=article_id
+    ).options(
+        joinedload(Article.tags)
+    ).one_or_none()
 
     if _article is None:
         raise NotFound
     return render_template(
-        "articles/details.html",
+        'articles/details.html',
         article=_article,
     )
 
 
-@article.route("/create/", methods=["GET"])
+@article.route('/create/', methods=['GET'])
 @login_required
 def create_article_form():
     form = CreateArticleForm(request.form)
-    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by("name")]
-    return render_template("articles/create.html", form=form)
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
+    return render_template('articles/create.html', form=form)
 
 
-@article.route("/", methods=["POST"])
+@article.route('/', methods=['POST'])
 @login_required
 def create_article():
     form = CreateArticleForm(request.form)
 
-    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by("name")]
+    form.tags.choices = [(tag.id, tag.name) for tag in Tag.query.order_by('name')]
 
     if form.validate_on_submit():
         _article = Article(title=form.title.data.strip(), text=form.text.data)
@@ -71,6 +69,6 @@ def create_article():
         db.session.add(_article)
         db.session.commit()
 
-        return redirect(url_for("article.article_detail", article_id=_article.id))
+        return redirect(url_for('article.article_detail', article_id=_article.id))
 
-    return render_template("articles/create.html", form=form)
+    return render_template('articles/create.html', form=form)

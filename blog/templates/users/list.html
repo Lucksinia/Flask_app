@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{super}} Users list
+    Users list
 {% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col">
+    <div class="row">
         <h1>Users:</h1>
-        {% for user in users %}
-        <ul>
-            <li><a href="{{ url_for('user.profile', pk=user.id) }}">{{ user.email }}</a></li>
-        </ul>
-        {% endfor %}
     </div>
-</div>
+    <div class="row">
+        <div class="col">
+            {% for user in users %}
+                <ul>
+                    <li><a href="{{ url_for('user.profile', pk=user.id) }}">{{ user.email }}</a></li>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
+
