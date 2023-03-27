@@ -11,5 +11,5 @@ Made for Geekbrains course on Flask
 - [x] Урок 7. Модель статьи: категории, теги, связи в БД
 - [x] Урок 8. Flask Admin
 - [x] Урок 9. JSON REST API, CRUD, swagger, marshmallow, flask-combo-jsonapi, combojsonapi
-- [ ] Урок 10. Продолжаем работу с flask-combo-jsonapi, знакомство с combojsonapi, системой плагинов
+- [x] Урок 10. Продолжаем работу с flask-combo-jsonapi, знакомство с combojsonapi, системой плагинов
 - [ ] Урок 11. Heroku. Публикация приложения
