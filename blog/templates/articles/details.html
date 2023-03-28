@@ -1,27 +1,40 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ article.title }}
+Article #{{ article.id }}: {{ article.title }}
 {% endblock %}
 
 {% block body %}
-    <div class="row">
-        <h1>{{ article.title }}</h1>
-    </div>
-    <div class="row">
-        <div class="col-md-12">{{ article.text }}</div>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <div><small class="text-muted">Author: {{ article.author.user.first_name }} {{ article.author.user.last_name }}</small></div>
-            <div><small class="text-muted">Created at: {{ article.created_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
-            <div><small class="text-muted">Updated at: {{ article.updated_at.strftime('%d-%m-%Y %H:%M:%S') }}</small></div>
+{% if current_user.is_authenticated %}
+<div class="row">
+    <h1>{{ article.title }}</h1>
+    <div>
+        <div class="row">
+            <div class="col-md-12">{{ article.text }}
+                <a href="{{ url_for('articles_app.list') }}">
+                    <button name="forwardBtn" type="submit">Return</button>
+                </a>
+            </div>
         </div>
-        <div class="col-6">
-            {% for tag in article.tags %}
+        <div class="row">
+            <div class="col-6">
+                <a href="{{ url_for('articles_app.text', text=article.text) }}" class="btn btn-primary">Text to mp3</a>
+                <a href="{{ url_for('articles_app.audio') }}" class="btn btn-primary">Listen text</a>
+            </div>
+            {{ result }}
+            <div>Published {{ article.dt_created }}</div>
+            <div>by {{ article.author.user.username }}</div>
+            {% if article.tags %}
+            <div class="col-6">
+                {% for tag in article.tags %}
                 <span class="badge bg-primary">{{ tag.name }}</span>
-            {% endfor %}
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
     </div>
+    {% else %}
+    <h1> Авторизуйтесь для просмотра статей </h1>
+    {% endif %}
+</div>
 {% endblock %}
