@@ -25,7 +25,7 @@ api = Api()
 def create_app() -> Flask:
     print('start!')
     app = Flask(__name__)
-    app.config.from_object('blog.configs')
+    app.config.from_object('blog.config')
     register_extensions(app)
     register_blueprints(app)
     create_init_user(app)
