@@ -116,15 +116,3 @@ def create_init_user(app):
         db.session.commit()
         print('done!')
 
-# def create_articles(app):
-#     from blog.models import Article
-#     print('starting create articles...')
-#     with app.app_context():
-#         admin = Article(title='Покоряем flask в 36', text='Невероятная история успеха')
-#         amelia = Article(title='Интриги и скандалы', text='Папамамапапамамадеда')
-#         varvara = Article(title='Два месяца в детском садике', text='Вторая группа, собираем и поем')
-#         db.session.add(admin)
-#         db.session.add(amelia)
-#         db.session.add(varvara)
-#         db.session.commit()
-#         print("done! created articles:", admin.title, amelia.title, varvara.title)
